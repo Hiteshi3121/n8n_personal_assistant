@@ -1,0 +1,270 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -224,
+        -16
+      ],
+      "id": "e57f0f14-2ecc-464e-872e-486d893b6b86",
+      "name": "chat",
+      "webhookId": "2a108bc5-f258-4787-967f-71658dcfed5f"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=You are a helpful assistant\n\n{{ $json.chatInput }} Used contact_db tool, create event tool for the contacts details to send emails and managing calendar "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        256,
+        -16
+      ],
+      "id": "ac91f390-e007-45ec-82cf-50306a0ca7ca",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-4o-mini",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        0,
+        208
+      ],
+      "id": "d9ab791f-84a6-43ae-ace1-72b3f054cea3",
+      "name": "gpt4",
+      "credentials": {
+        "openRouterApi": {
+          "id": "FcFfuEqlPc5lJBHv",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To', ``, 'string') }}",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.2,
+      "position": [
+        256,
+        208
+      ],
+      "id": "92edce1a-6357-411f-a53a-772d1c78b9c8",
+      "name": "send Gmail",
+      "webhookId": "7ee06cf3-eed6-4b50-8a5f-668ca4e7c7a7",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "dRtFKBYI5eqC67jG",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "aglawechakuli@gmail.com",
+          "mode": "list",
+          "cachedResultName": "aglawechakuli@gmail.com"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "additionalFields": {
+          "attendees": [
+            "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('attendees0_Attendees', ``, 'string') }}"
+          ],
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        384,
+        208
+      ],
+      "id": "cc94d730-72e3-454c-a970-fed309fef0f1",
+      "name": "Create Event",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "2Gzpxd1EfhXNlXOu",
+          "name": "Google Calendar OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1bV_VwLnxf61BwtX-cyEPbtL0IN-JDJ-X_LODwnzQT4Y",
+          "mode": "list",
+          "cachedResultName": "Contact Details",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1bV_VwLnxf61BwtX-cyEPbtL0IN-JDJ-X_LODwnzQT4Y/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1bV_VwLnxf61BwtX-cyEPbtL0IN-JDJ-X_LODwnzQT4Y/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        512,
+        208
+      ],
+      "id": "a99da954-8440-4fbf-8064-85391a69a456",
+      "name": "Contact DB",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "bQT8409UAk8Lclgb",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "q": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Search_Query__q_', ``, 'string') }}",
+        "additionalFields": {},
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-serpapi.serpApiTool",
+      "typeVersion": 1,
+      "position": [
+        640,
+        208
+      ],
+      "id": "46e8c017-6f77-4ad7-93b8-6a0fb7e76127",
+      "name": "web search",
+      "credentials": {
+        "serpApi": {
+          "id": "ShDCDE5Ho8iEKvJq",
+          "name": "SerpApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 15
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        128,
+        208
+      ],
+      "id": "67c74c85-da59-410e-a9a9-72ec0c58370b",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "chat": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "gpt4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "send Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Event": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contact DB": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "web search": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "95a01848-79ee-4168-9f8e-0823d2f68e73",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c051d2cf0acc4026a8af4cd0ad21b7f53188072af7273be3e22ed36027ab21a8"
+  },
+  "id": "6vVzKBJVLfHQzP7g",
+  "tags": []
+}
