@@ -38,7 +38,7 @@ SerpAPI
 <img width="940" height="301" alt="image" src="https://github.com/user-attachments/assets/ad63634b-b20b-4e04-8233-cee53ac3510c" />
 <img width="972" height="420" alt="image" src="https://github.com/user-attachments/assets/4e3f5f3c-13b8-4420-8d42-11a879cc32be" />
 
-
+Output/ screen recording link - https://drive.google.com/file/d/1idXq-zAmLKYM1uyXTipNmnX0a6VAjsFT/view?usp=sharing
 
 **This priject - **
 Demonstrates Agentic AI + Automation
