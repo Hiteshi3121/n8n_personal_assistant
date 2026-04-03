@@ -2,6 +2,9 @@
 
 An agentic AI workflow built using n8n, and OpenRouter (GPT-4o-mini) that automates real-world productivity tasks through natural language commands.
 
+<img width="972" height="424" alt="image" src="https://github.com/user-attachments/assets/e4e5d0c5-01a6-4114-9e13-458615ace9ee" />
+
+
 **🔥 Key Capabilities**
 
 📧 Automated email generation & sending (Gmail API)
@@ -31,6 +34,11 @@ Gmail API
 Google Calendar API
 Google Sheets API
 SerpAPI
+
+<img width="940" height="301" alt="image" src="https://github.com/user-attachments/assets/ad63634b-b20b-4e04-8233-cee53ac3510c" />
+<img width="972" height="420" alt="image" src="https://github.com/user-attachments/assets/4e3f5f3c-13b8-4420-8d42-11a879cc32be" />
+
+
 
 **This priject - **
 Demonstrates Agentic AI + Automation
